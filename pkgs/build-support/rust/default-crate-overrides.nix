@@ -273,7 +273,9 @@
   };
 
   pam-sys = attr: {
-    buildInputs = [ linux-pam ];
+    buildInputs = [
+      linux-pam
+    ];
   };
 
   pango-sys = attr: {
