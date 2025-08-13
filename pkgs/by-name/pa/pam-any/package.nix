@@ -2,7 +2,7 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  linux-pam,
+  pam,
 }:
 
 rustPlatform.buildRustPackage {
@@ -23,14 +23,19 @@ rustPlatform.buildRustPackage {
   ];
 
   buildInputs = [
-    linux-pam # <<< this is for pam-sys and is already specified in `defaultCrateOverrides`, but is that only for `buildRustCrate`? >>>
+    pam # <<< this is for pam-sys and is already specified in `defaultCrateOverrides`, but is that only for `buildRustCrate`? >>>
   ];
+
+  postInstall = ''
+    mkdir -p $out/lib/security
+    mv $out/lib/libpam_any.so $out/lib/security/
+  '';
 
   meta = with lib; {
     description = "A PAM module that runs multiple other PAM modules in parallel, succeeding as long as one of them succeeds.";
     homepage = "https://github.com/ChocolateLoverRaj/pam-any";
     license = with licenses; [ asl20 ];
-    maintainers = with maintainers; [ jfly ];
+    maintainers = with maintainers; [ jfly adeci ];
     platforms = with lib.platforms; linux;
   };
 }

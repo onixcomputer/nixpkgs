@@ -390,6 +390,7 @@
   ./security/misc.nix
   ./security/oath.nix
   ./security/pam.nix
+  ./security/pam-any.nix
   ./security/pam_mount.nix
   ./security/please.nix
   ./security/polkit.nix
